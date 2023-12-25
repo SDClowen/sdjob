@@ -1,0 +1,13 @@
+{
+    "autoload": {
+        "psr-4": {
+            "App\\Models\\": "app/models/",
+            "App\\Helpers\\": "app/helpers/",
+            "App\\Controllers\\": "app/controllers/"
+        }
+    },
+    "require": {
+        "sdclowen/sdphp": "dev-master",
+        "verot/class.upload.php": "^2.1"
+    }
+}
