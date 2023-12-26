@@ -86,7 +86,7 @@ class Job extends Model
 
             if (isset($search->title))
                 $db->like("a.title", "%$search->title%");
-/*
+
             if (isset($search->knowledge))
                 $db->where("a.knowledge", value: $search->knowledge);
 
@@ -112,7 +112,7 @@ class Job extends Model
                 $db->where("a.stateId", value: $search->stateId);
 
             if (isset($search->sectorId))
-                $db->where("c.sectorId", value: $search->sectorId);*/
+                $db->where("c.sectorId", value: $search->sectorId);
         }
 
         return $db->results();

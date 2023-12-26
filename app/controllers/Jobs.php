@@ -65,6 +65,10 @@ class Jobs extends Controller
             if($validate)
                 die($validate);
 
+            foreach($post as $k => $v)
+                if($v == -1)
+                    unset($post->$k);
+
             $jobs = Job::allWithEmployers(0, 10000, $post);
 
             $this->render("jobs-listing", [

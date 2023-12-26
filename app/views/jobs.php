@@ -24,6 +24,7 @@
                     <div class="mb-5">
                         <label for="states" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">İlçe</label>
                         <select id="states" name="stateId" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="-1">Hepsi</option>
                             <option n:foreach="$states as $state" value="{$state->id}">{$state->name}</option>
                         </select>
                     </div>
@@ -32,6 +33,7 @@
                         <div class="mb-5">
                             <label for="knowledges" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tecrübe</label>
                             <select id="knowledges" name="knowledge" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option value="-1">Hepsi</option>
                                 <option n:foreach="\App\Models\Job::KNOWLEDGES as $k => $v" value="{$k}">{$v}</option>
                             </select>
                         </div>
@@ -39,6 +41,7 @@
                         <div class="mb-5">
                             <label for="workingType" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Çalışma Biçimi</label>
                             <select id="workingType" name="workingType" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option value="-1">Hepsi</option>
                                 <option n:foreach="\App\Models\Job::WORKING_TYPES as $k => $v" value="{$k}">{$v}</option>
                             </select>
                         </div>
@@ -48,6 +51,7 @@
                         <div class="mb-5">
                             <label for="educationLevel" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Eğitim Seviyesi</label>
                             <select id="educationLevel" name="educationLevel" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option value="-1">Hepsi</option>
                                 <option n:foreach="\App\Models\Job::EDUCATIONS as $k => $v" value="{$k}">{$v}</option>
                             </select>
                         </div>
@@ -55,6 +59,7 @@
                         <div class="mb-5">
                             <label for="position" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pozisyon</label>
                             <select id="position" name="position" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option value="-1">Hepsi</option>
                                 <option n:foreach="\App\Models\Job::POSITIONS as $k => $v" value="{$k}">{$v}</option>
                             </select>
                         </div>
@@ -63,6 +68,7 @@
                     <div class="mb-5">
                         <label for="sectorId" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sektör</label>
                         <select id="sectorId" name="sectorId" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="-1">Hepsi</option>
                             <option n:foreach="$sectors as $v" value="{$v->id}">{$v->name}</option>
                         </select>
                     </div>
@@ -70,6 +76,7 @@
                     <div class="mb-5">
                         <label for="department" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Departman</label>
                         <select id="department" name="department" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="-1">Hepsi</option>
                             <option n:foreach="\App\Models\Job::DEPARTMENTS as $k => $v" value="{$k}">{$v}</option>
                         </select>
                     </div>
@@ -78,6 +85,7 @@
                         <div class="mb-5">
                             <label for="militaryStatus" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Askerlik Durumu</label>
                             <select id="militaryStatus" name="militaryStatus" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option value="-1">Hepsi</option>
                                 <option n:foreach="\App\Models\Job::MILITARY_SITUATIONS as $k => $v" value="{$k}">{$v}</option>
                             </select>
                         </div>
@@ -85,6 +93,7 @@
                         <div class="mb-5">
                             <label for="gender" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cinsiyet</label>
                             <select id="gender" name="gender" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option value="-1">Farketmez</option>
                                 <option n:foreach="\App\Models\Job::GENDERS as $k => $v" value="{$k}">{$v}</option>
                             </select>
                         </div>
