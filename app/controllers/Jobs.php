@@ -240,7 +240,8 @@ class Jobs extends Controller
             "workingType" => $post->workingType,
             "gender" => $post->gender,
             "stateId" => $post->stateId,
-            "description" => $post->description
+            "description" => $post->description,
+            "slug" => slugify($post->title)
         ];
 
         $result = $this->db->from("jobs")->insert($data);
