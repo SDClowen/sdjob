@@ -184,6 +184,9 @@ class Jobs extends Controller
         if ($user->type != User::APPLICANT)
             die("USER_TYPE_ERROR");
 
+        if(!$user->detail->cv)
+            return;
+
         $isApplicant = $this->db->from("jobapplicants")->where("jobId", value: $id)->where("applicantId", value: $user->detail->id)->first();
         if ($isApplicant)
             die("ALREADY_APPLICANT");
