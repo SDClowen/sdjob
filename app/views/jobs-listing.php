@@ -9,7 +9,7 @@
             </div>
         </div>
         <div class="inline-flex self-end">
-            {if $user}
+            {if isset($user)}
             {if $user->type != 1}
             {if $user && $job->applicantId === $user->id}
             <a href="#" onclick="return false" title="{time_diff($job->applicantDate)}" class="mr-3 flex items-center justify-center px-4 py-2 text-md font-medium text-white rounded-lg bg-gray-400 dark:bg-gray-600">
