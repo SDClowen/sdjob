@@ -75,11 +75,10 @@ class Job extends Model
     public static function allWithEmployers($offset, $limit, $search = null)
     {
         $db = Database::get()
-            ->select("a.*, d.applicantId, d.createdAt applicantDate, b.title employerTitle, c.photo")
+            ->select("a.*, b.title employerTitle, c.photo")
             ->from("jobs a")
             ->join("employers b", "a.employerId = b.id")
             ->join("users c", "c.id = b.userId")
-            ->leftJoin("jobapplicants d", "a.id = d.jobId")
             ->limit($offset, $limit);
 
         if ($search) {
