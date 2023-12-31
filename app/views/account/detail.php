@@ -8,7 +8,7 @@
     </div>
 </div>
 
-<div class="message fixed bottom-5 right-5 z-10 min-h-max"></div>
+<div class="message fixed bottom-5 right-5 z-10 min-h-max z-20"></div>
 
 <div class="container px-6 py-12 mx-auto relative">
     <div class="lg:flex lg:-mx-6" x-data="{ activeTab:  0 }">

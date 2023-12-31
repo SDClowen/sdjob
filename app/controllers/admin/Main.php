@@ -150,7 +150,10 @@ class Main extends Controller
         $config->title = $post->title;
         $config->keywords = $post->keywords;
         $config->description = $post->description;
+        $config->accountActivation = (int)isset($post->accountActivation);
         $config->update();
+
+        success("Site ayarları başarıyla güncellendi.");
     }
     
     #[route(method: route::xhr_get | route::get, session: "admin", otherwise: "/admin/auth")]

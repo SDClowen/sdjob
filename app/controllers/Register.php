@@ -9,11 +9,11 @@ use App\Models\{User, Content};
 class Register extends Controller
 {
     #[route(method: route::xhr_get | route::get)]
-	public function index()
-	{
-		if (session_check("user"))
+    public function index()
+    {
+        if (session_check("user"))
             redirect("/");
-        
+
         session_remove("tempPin");
         if (session_check("tempPin"))
             redirect("/pin");
@@ -21,14 +21,14 @@ class Register extends Controller
         $this->view("index", "register", lang("register"), [
             "menu" => Content::menu()
         ]);
-	}
+    }
 
     #[route(method: route::xhr_get | route::get)]
-	public function applicant()
+    public function applicant()
     {
         if (session_check("user"))
             redirect("/");
-        
+
         session_remove("tempPin");
         if (session_check("tempPin"))
             redirect("/pin");
@@ -41,11 +41,11 @@ class Register extends Controller
     }
 
     #[route(method: route::xhr_get | route::get)]
-	public function employer()
+    public function employer()
     {
         if (session_check("user"))
             redirect("/");
-        
+
         session_remove("tempPin");
         if (session_check("tempPin"))
             redirect("/pin");
@@ -58,11 +58,11 @@ class Register extends Controller
     }
 
     #[route(method: route::xhr_post, uri: "applicant")]
-	public function applicantAjax()
+    public function applicantAjax()
     {
         if (session_check("user"))
             warning(redirect: "/");
-        
+
         session_remove("tempPin");
         if (session_check("tempPin"))
             warning(redirect: "/pin");
@@ -79,30 +79,55 @@ class Register extends Controller
             "passwordRepeat" => ["name" => "Şifre Tekrar", "required" => true, "min" => 6, "max" => 48, "match" => "password"]
         ]);
 
-        if($validate)
+        if ($validate)
             warning($validate);
 
-        if(!isset($post->privacy))
+        if (! isset($post->privacy))
             warning(lang("validation.checked_error", "Gizlilik Politikası"));
 
         unset($post->passwordRepeat, $post->privacy);
-        
-        if(User::exists("email", $post->email))
+
+        if (User::exists("email", $post->email))
             warninglang("email.exists.error");
 
-        if(User::create($post, User::APPLICANT))
-            success("Başarıyla kayıt oldunuz. Yönlendiriliyorsunuz...", redirect: "/auth:3000");   
+        $createdId = User::create($post, User::APPLICANT);
+        if ($createdId) {
+            if (\Core\Config::get()->accountActivation) {
+
+                $confirmCode = md5(hash("sha256", $createdId . generate_password(32)));
+                User::updateBy("email", $post->email, [
+                    "confirmCode" => $confirmCode
+                ]);
+
+                $activationLink = Request::baseUrl() . "/account/approve/" . $confirmCode;
+
+                $fullname = $post->name . " " . $post->surname;
+                $content = $this->render("templates/account-approve", [
+                    "value" => $confirmCode,
+                    "fullname" => $fullname,
+                    "systemUrl" => Request::baseUrl(),
+                    "url" => $activationLink,
+                    "operatingSystem" => get_os(),
+                    "browserName" => get_browser_name()
+                ], false);
+
+                \App\Helpers\Mail::send(lang("account.approve"), $fullname, $post->email, $content);
+                success("Başarıyla kayıt oldunuz. Lütfen E-Posta adresinizi kontrol ederek hesap onaylama işlemini gerçekleştiriniz!", redirect: "/auth:5000");
+            }
+
+            success("Kayıt işlemi başarıyla gerçekleştirildi...", redirect: "/auth:2500");
+        }
 
         getDataError();
     }
 
-    
+
     #[route(method: route::xhr_post, uri: "employer")]
-	public function employerAjax()
+    public function employerAjax()
     {
         if (session_check("user"))
             warning(redirect: "/");
-        
+
         session_remove("tempPin");
         if (session_check("tempPin"))
             warning(redirect: "/pin");
@@ -124,19 +149,44 @@ class Register extends Controller
             "passwordRepeat" => ["name" => "Şifre Tekrar", "required" => true, "min" => 6, "max" => 48, "match" => "password"]
         ]);
 
-        if($validate)
+        if ($validate)
             warning($validate);
 
-        if(!isset($post->privacy))
+        if (! isset($post->privacy))
             warning(lang("validation.checked_error", "Gizlilik Politikası"));
 
         unset($post->passwordRepeat, $post->privacy);
 
-        if(User::exists("email", $post->email))
+        if (User::exists("email", $post->email))
             warninglang("email.exists.error");
 
-        if(User::create($post, User::EMPLOYER))
-            success("Başarıyla kayıt oldunuz. Yönlendiriliyorsunuz...", redirect: "/auth:3000");   
+        $createdId = User::create($post, User::EMPLOYER);
+        if ($createdId) {
+            if (\Core\Config::get()->accountActivation) {
+
+                $confirmCode = md5(hash("sha256", $createdId . generate_password(32)));
+                User::updateBy("email", $post->email, [
+                    "confirmCode" => $confirmCode
+                ]);
+
+                $activationLink = Request::baseUrl() . "/account/approve/" . $confirmCode;
+
+                $fullname = $post->name . " " . $post->surname;
+                $content = $this->render("templates/account-approve", [
+                    "value" => $confirmCode,
+                    "fullname" => $fullname,
+                    "systemUrl" => Request::baseUrl(),
+                    "url" => $activationLink,
+                    "operatingSystem" => get_os(),
+                    "browserName" => get_browser_name()
+                ], false);
+
+                \App\Helpers\Mail::send(lang("account.approve"), $fullname, $post->email, $content);
+                success("Başarıyla kayıt oldunuz. Lütfen E-Posta adresinizi kontrol ederek hesap onaylama işlemini gerçekleştiriniz!", redirect: "/auth:5000");
+            }
+
+            success("Kayıt işlemi başarıyla gerçekleştirildi...", redirect: "/auth:2500");
+        }
 
         getDataError();
     }

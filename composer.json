@@ -8,6 +8,7 @@
     },
     "require": {
         "sdclowen/sdphp": "dev-master",
-        "verot/class.upload.php": "^2.1"
+        "verot/class.upload.php": "^2.1",
+        "phpmailer/phpmailer": "^6.9"
     }
 }

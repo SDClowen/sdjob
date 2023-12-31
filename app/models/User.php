@@ -108,7 +108,7 @@ class User extends Model
             ]);
         }
 
-        return true;
+        return $userId;
     }
 
     /**

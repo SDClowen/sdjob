@@ -9,7 +9,7 @@
 </div>
 
 
-<div class="message fixed bottom-5 right-5 min-h-max"></div>
+<div class="message fixed bottom-5 right-5 min-h-max z-20"></div>
 <section class="bg-white dark:bg-gray-900">
     <div class="py-8 lg:py-16 px-4 mx-auto m-6 max-w-screen-md">
         <h2 class="hidden mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">{lang('employer.register')}</h2>

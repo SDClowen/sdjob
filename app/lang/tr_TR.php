@@ -57,6 +57,7 @@ return [
 	'no.data.changed' => 'Değişen herhangi bir veri olmadığı için işlem yapılmadı!',
 	"authorize.error" => "Bu işlemi yapmak için yetkiniz yok!",
 	'email.exists.error' => "Bu e-posta adresi sistemde zaten kayıtlı!",
+	'email.not.exists.error' => "Bu e-posta adresine ait kullanıcı bulunamadı!",
 	'payment.min.request'=> 'Ödeme minimum <b>%s TL</b> ile yapılır.',
 	'payment.max.request'=> 'Tek seferde maximum <b>%s TL</b> çekilebilir.',
 	'iban.format.error'=> 'Iban tanımlanamadı. Iban formatı yanlış!',
@@ -65,13 +66,17 @@ return [
 	'type.keyword'		=> "Anahtar kelime yazınız",
 	'successfully.created.workorder' => "İş emri başarıyla oluşturuldu...",
 	'deleted.change.error' => "Silinmiş öğeye değiştirilme yapılamaz!",
-
+	'successfully.send.activation' => "İşlem başarılı, lütfen e-posta adresinizi kontrol ediniz!",
 	'wrong.auth.info' => "Giriş bilgileri doğrulanamadı. Lütfen kontrol ederek tekrar deneyiniz!",
-	'phone.or.email' => "Telefon No / E-mail",
+	'pw.activation.already.sent' => "Şifre sıfırlama bağlantısı e-posta adresine zaten gönderildi. <br> Lütfen postalarınızı kontrol ediniz.",
+	'email' => "E-Posta",
+	'phone.or.email' => "Telefon No / E-Posta",
 	'password' => "Şifre",
 	'remember.me' => "Beni Hatırla",
 	'security.code' => "Güvenlik Kodu",
 	'register' => "Üye Ol",
 	'employer.register' => 'İşveren Üyeliği',
-	'applicant.register' => 'Personel Üyeliği'
+	'applicant.register' => 'Personel Üyeliği',
+	'reset.password' => 'Şifre Sıfırlama',
+	'account.approve' => 'Hesap Onaylama',
 ];

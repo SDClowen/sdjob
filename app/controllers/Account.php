@@ -271,4 +271,78 @@ class Account extends Controller
 
         getDataError();
     }
+
+    
+	#[route(uri: "password-reset")]
+	function passwordReset(string $emailConfirm)
+	{
+		if (session_check("user"))
+			redirect("/");
+
+		if(!alpha_dash($emailConfirm))
+			die(lang("server.respond.error"));
+
+		if(strlen($emailConfirm) != 32)
+			debug("Invalid code!");
+
+		$found = User::exists("resetPasswordConfirm", $emailConfirm);
+		if(!$found)
+			debug("Invalid password confirm code!");
+
+		$this->render("password-reset", [
+			lang("password.reset"),
+			"emailConfirm" => $emailConfirm
+		]);
+	}
+
+	#[route(method: route::xhr_post, uri: "password-reset")]
+	public function passwordResetAjax()
+	{
+		$post = Request::post();
+		
+		$validate = validate($post, [
+			"code" => ["name" => "Kod", "required" => true, "min" => 32, "max" => 32],
+            "email" => ["name" => "E-Posta", "required" => true, "min" => 6, "max" => 64, "email" => true],
+			"password" => ["name" => lang("new.password"), "required" => true, "min" => 6, "max" => 32],
+			"confirmPassword" => ["name" => lang("new.password.again"), "required" => true, "min" => 6, "max" => 32, "match" => "password"],
+			"csrf" => ["name" => lang("security.code"), "required" => true]
+		]);
+
+		if($validate)
+			warning($validate);
+        
+        if(!User::exists("email", $post->email))
+			errorlang("email.not.exists.error");
+
+		$post->password = hash("sha256", $post->password);
+
+		$result = User::updateBy("resetPasswordConfirm", $post->code, [
+			"resetPasswordConfirm" => "",
+			"prevPassword" => '',
+			"password" => $post->password
+		]);
+
+		if($result)
+		{
+			session_destroy();
+			successlang("password.successfully.changed", redirect: "/auth:2000");
+		}
+
+		getDataError();
+	}
+
+    public function approve(string $confirmCode)
+    {
+        $confirmCode = htmlentities(htmlspecialchars($confirmCode));
+        if(User::exists("confirmCode", $confirmCode))
+        {
+            User::updateBy("confirmCode", $confirmCode, [
+                "confirm" => 1
+            ]);
+
+            redirect("/auth");
+        }
+
+        redirect();
+    }
 }

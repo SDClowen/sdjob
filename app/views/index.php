@@ -21,9 +21,9 @@
     {ajs("app")|noescape}
 </head>
 
-<body class="bg-gray-50 dark:bg-gray-900 dark:text-white">
+<body class="bg-gray-50 dark:bg-gray-900 dark:text-white font-display">
     <div class="min-h-full">
-        <nav class="bg-white/50 border-gray-200 shadow-md sticky top-0 z-20 backdrop-blur-xl dark:bg-gray-900">
+        <nav class="bg-white/50 font-body border-gray-200 shadow-md sticky top-0 z-20 backdrop-blur-xl dark:bg-gray-900">
             <div class="flex flex-wrap items-center justify-between max-w-screen-xl mx-auto p-4">
                 <a href="/" live="true" class="flex items-center">
                     <img src="/public/logo.png" class="h-14 mr-3" />

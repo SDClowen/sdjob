@@ -3,33 +3,25 @@
 @import "tailwindcss/utilities";
 
 @layer base {
-    
-    html {
-        font-family: 'Inter', sans-serif;
-    }
-    
-    nav {
-        font-family: 'Poppins', sans-serif;
-    }
 
     .active{
         @apply font-semibold text-red-600
     }
     
     .alert-info{
-        @apply p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400
+        @apply p-4 mb-4  text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400
     }
 
     .alert-warning{
-        @apply p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300
+        @apply p-4 mb-4  text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300
     }
 
     .alert-success{
-        @apply p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400
+        @apply p-4 mb-4  text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400
     }
 
     .alert-danger{
-        @apply p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400
+        @apply p-4 mb-4  text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400
     }
 
     .dropdown:hover > #mega-menu-dropdown,

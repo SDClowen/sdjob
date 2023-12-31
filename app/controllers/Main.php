@@ -5,10 +5,10 @@ namespace App\Controllers;
 use Core\{Controller, Request, Config};
 use Core\Attributes\route;
 use App\Models\{Content, User};
+use App\Helpers\Mail;
 
 class Main extends Controller
 {
-
     #[route(method: route::xhr_get | route::get)]
     public function index()
     {
@@ -72,10 +72,13 @@ class Main extends Controller
         if (! $memberDetail)
             error(lang("wrong.auth.info"));
 
-        while (User::exists("pin_token", ($pin = join(randomSequence(6)))));
+        if(!$memberDetail->confirm)
+            warning("Giriş yapabilmek için hesabınızı onaylamanız gerekmektedir. <br/><br/> Lütfen E-Posta adresinize gelen hesap onaylama bağlantısını kullanarak hesabınızı onaylayın!");
 
-        User::updateBy("id", $memberDetail->id, ["pin_token" => $pin]);
-        session_set("tempPin", hash("sha256", $pin));
+        #while (User::exists("pin_token", ($pin = join(randomSequence(6)))));
+
+        #User::updateBy("id", $memberDetail->id, ["pin_token" => $pin]);
+        #session_set("tempPin", hash("sha256", $pin));
 
         #disabled for now
         #\SmsHelper::send($memberDetail->phone, "Onay Kodu: ". $pin);
@@ -129,4 +132,67 @@ class Main extends Controller
         else
             redirect("/");
     }
+
+    #[route(method: route::xhr_get | route::get, uri: "forgot-password")]
+	function forgotPassword()
+	{
+		if (session_check("user"))
+			redirect("/");
+
+        $this->view("index", "forgot-password", "Şifremi Unuttum", [
+            "menu" => Content::menu()
+        ]);
+	}
+
+	#[route(method: route::xhr_post, uri: "forgot-password")]
+	function forgotPasswordAjax()
+	{
+		if (session_check("user"))
+			errorlang("authorize.error");
+
+		$post = Request::post();
+		$check = validate($post, [
+			"email" => ["name" => lang("email"), "required" => true, "email" => true],
+			"csrf" => ["name" => lang("security.code"), "required" => true]
+		]);
+
+		if ($check)
+			error($check);
+		elseif (!check_csrf($post->csrf))
+			errorlang("csrf.error", scrollTo: true);
+
+		$detail = $this->db->select("id, name, surname, resetPasswordConfirm, resetPasswordTime")
+						->from("users")
+						->where("email", "=", $post->email)
+						->result();
+
+		if (!$detail)
+			errorlang("email.not.exists.error");
+		
+		$hours = (time() - strtotime($detail->resetPasswordTime)) / 3600;
+		if($detail->resetPasswordConfirm && $hours < 1)
+			infolang("pw.activation.already.sent");
+		
+		$resetPasswordConfirm = md5(hash("sha256", $detail->id.generate_password(32)));
+		User::updateBy("email", $post->email, [
+			"resetPasswordConfirm" => $resetPasswordConfirm, 
+			"resetPasswordTime" => date('Y-m-d H:i:s')
+		]);
+
+		$activationLink = Request::baseUrl()."/account/password-reset/".$resetPasswordConfirm;
+		
+        $fullname = $detail->name." ".$detail->surname;
+		$content = $this->render("templates/password-reset", [
+			"value" => $resetPasswordConfirm,
+			"fullname" => $fullname,
+			"systemUrl" => Request::baseUrl(),
+			"url" => $activationLink,
+            "operatingSystem" => get_os(),
+            "browserName" => get_browser_name()
+		], false);
+
+		Mail::send(lang("reset.password"), $fullname, $post->email, $content);
+
+		successlang("successfully.send.activation");
+	}
 }
