@@ -14,7 +14,10 @@ class Main extends Controller
         $user = session_get("admin");
 
 		$this->view("admin/index", "admin/home", "Yönetici Paneli", [
-            "user" => $user
+            "user" => $user,
+            "userCount" => $this->db->select("count(id)")->from("users")->first(),
+            "jobCount" => $this->db->select("count(id)")->from("jobs")->first(),
+            "jobApplicantsCount" => $this->db->select("count(id)")->from("jobApplicants")->first()
         ]);
 	}
 
@@ -140,7 +143,11 @@ class Main extends Controller
         $check = validate($post, [
             "title" => ["name" => "Site Başlığı", "required" => true, "min" => 4, "max" => 64],
             "keywords" => ["name" => "Anahtar Kelimeler", "required" => true, "min" => 6, "max" => 250],
-            "description" => ["name" => "Site Açıklaması", "required" => true, "min" => 6, "max" => 250]
+            "description" => ["name" => "Site Açıklaması", "required" => true, "min" => 6, "max" => 250],
+            "facebookUrl" => ["name" => "Facebook Adresi", "min" => 4, "max" => 128],
+            "linkedInUrl" => ["name" => "LinkedIn Adresi", "min" => 4, "max" => 128],
+            "twitterUrl" => ["name" => "Twitter Adresi", "min" => 4, "max" => 128],
+            "youtubeUrl" => ["name" => "Youtube Adresi", "min" => 4, "max" => 128],
         ]);
 
         if($check)
@@ -151,6 +158,11 @@ class Main extends Controller
         $config->keywords = $post->keywords;
         $config->description = $post->description;
         $config->accountActivation = (int)isset($post->accountActivation);
+
+        $config->facebookUrl = $post->facebookUrl;
+        $config->linkedInUrl = $post->linkedInUrl;
+        $config->twitterUrl = $post->twitterUrl;
+        $config->youtubeUrl = $post->youtubeUrl;
         $config->update();
 
         success("Site ayarları başarıyla güncellendi.");

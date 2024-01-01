@@ -17,21 +17,21 @@
             </ul>
             <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
                 <li>
-                    <a href="#" class="mr-8">
+                    <a href="{\Core\Config::get()->facebookUrl}" target="blank" class="mr-8">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z" />
                         </svg>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="mr-8">
+                    <a href="{\Core\Config::get()->linkedInUrl}" target="blank" class="mr-8">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z" />
                         </svg>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="mr-8">
+                    <a href="{\Core\Config::get()->twitterUrl}" target="blank" class="mr-8">
                         <svg class="h-4 w-6" viewBox="0 -2 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor">
                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                             <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -48,7 +48,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="mr-8">
+                    <a href="{\Core\Config::get()->youtubeUrl}" target="blank" class="mr-8">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-6" fill="currentColor" viewBox="0 0 24 24">
                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                             <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
