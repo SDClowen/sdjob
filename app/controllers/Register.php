@@ -90,9 +90,12 @@ class Register extends Controller
         if (User::exists("email", $post->email))
             warninglang("email.exists.error");
 
+        $accountActivation = \Core\Config::get()->accountActivation;
+        $post->confirm = $accountActivation;
+
         $createdId = User::create($post, User::APPLICANT);
         if ($createdId) {
-            if (\Core\Config::get()->accountActivation) {
+            if ($accountActivation) {
 
                 $confirmCode = md5(hash("sha256", $createdId . generate_password(32)));
                 User::updateBy("email", $post->email, [
@@ -160,9 +163,12 @@ class Register extends Controller
         if (User::exists("email", $post->email))
             warninglang("email.exists.error");
 
+        $accountActivation = \Core\Config::get()->accountActivation;
+        $post->confirm = $accountActivation;
+
         $createdId = User::create($post, User::EMPLOYER);
         if ($createdId) {
-            if (\Core\Config::get()->accountActivation) {
+            if ($accountActivation) {
 
                 $confirmCode = md5(hash("sha256", $createdId . generate_password(32)));
                 User::updateBy("email", $post->email, [
