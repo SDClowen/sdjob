@@ -73,7 +73,7 @@
                 <label for="checkbox" class="select-none ms-2 text-md font-medium text-gray-600 dark:text-gray-300">Lütfen gizlilik politikamızı kabul ettiğinizi onaylayın</label>
             </div>
 
-            <button type="submit" class="block mx-auto py-3 p-24 text-md font-medium text-center text-white rounded-md bg-blue-400 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Kayıt Ol</button>
+            <button type="submit" class="block mx-auto py-3 p-24 text-md font-medium text-center text-white rounded-md bg-blue-400 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Oluştur</button>
         </form>
     </div>
 </section>
