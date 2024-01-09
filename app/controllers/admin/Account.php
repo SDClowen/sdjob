@@ -17,7 +17,7 @@ class Account extends Controller
             "user" => $user,
             "userCount" => $this->db->select("count(id)")->from("users")->first(),
             "jobCount" => $this->db->select("count(id)")->from("jobs")->first(),
-            "jobApplicantsCount" => $this->db->select("count(id)")->from("jobApplicants")->first()
+            "jobApplicantsCount" => $this->db->select("count(id)")->from("jobapplicants")->first()
         ]);
 	}
 
