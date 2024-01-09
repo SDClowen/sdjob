@@ -54,7 +54,7 @@
 </div>
 <hr>
 
-<div class="w-full max-w-screen-xl mb-5">
+<div class="w-full max-w-screen-xl mb-5 hidden">
     <div class="relative overflow-hidden border-b">
         <div class="flex-row items-center justify-between p-4 space-y-3 sm:flex sm:space-y-0 sm:space-x-4">
             <div>
